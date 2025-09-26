@@ -128,6 +128,7 @@ function TeacherLogin() {
   const useDemo = (account) => {
      localStorage.setItem("teacher", JSON.stringify({ email: account.email }));
     navigate("/teacher/dashboard"); // ➡️ Go straight to dashboard
+    window.location.reload();
   };
 
   return (
@@ -1058,6 +1059,7 @@ function AdminLogin() {
   const useDemo = (account) => {
       localStorage.setItem("admin", JSON.stringify({ email: account.email }));
     navigate("/admin/dashboard"); // ➡️ Go straight to dashboard
+    window.location.reload();
   };
 
   return (
