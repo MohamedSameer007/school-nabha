@@ -41,7 +41,7 @@ function Navbar() {
   return (
     <RBNavbar bg="light" expand="lg" className="mb-3 px-3">
       <RBNavbar.Brand as={Link} to="/">
-        Nabha School
+        School Nabha
       </RBNavbar.Brand>
       <Nav className="ms-auto">
         <Nav.Link as={Link} to="/teacher/login">
