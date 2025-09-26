@@ -1495,7 +1495,7 @@ function AdminDashboard() {
 function LandingPage() {
   return (
     <div className="container text-center mt-5">
-      <h1>Welcome to Nabha</h1>
+      <h1>Welcome to School Nabha</h1>
       <p>Please use the top navigation to login as Teacher or Admin.</p>
     </div>
   );
