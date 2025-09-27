@@ -1432,7 +1432,7 @@ function AdminDashboard() {
           {/* Quick Actions */}
           <Row className="mb-4">
             <Col>
-              <button className="w-100 p-3 btn btn-outline-dark">
+              <button className="w-100 p-3 btn btn-dark">
                 🏫 School Overview
               </button>
             </Col>
