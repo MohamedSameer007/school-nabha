@@ -1573,8 +1573,23 @@ function LandingPage() {
   return (
     <div className="container text-center mt-5">
       <h1>Welcome to School Nabha</h1>
-      <p>Please use the top navigation to login as Teacher or Admin.</p>
+      <p>use the below button to login as Teacher or Admin.</p>
+      <p>↓</p>
+      <div className="d-flex justify-content-center gap-3 mt-4">
+        <Nav.Link as={Link} to="/teacher/login">
+          <button className="btn btn-outline-dark px-4">
+            Teacher Login
+          </button>
+        </Nav.Link>
+
+        <Nav.Link as={Link} to="/admin/login">
+          <button className="btn btn-outline-dark px-4">
+            Admin Login
+          </button>
+        </Nav.Link>
+      </div>
     </div>
+    
   );
 }
 
