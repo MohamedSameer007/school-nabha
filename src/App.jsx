@@ -42,7 +42,7 @@ function Navbar() {
   return (
     <RBNavbar bg="light" expand="lg" className="mb-3 px-3">
       <RBNavbar.Brand as={Link} to="/">
-      School Nabha
+        School Nabha
       </RBNavbar.Brand>
       <Nav className="ms-auto">
         <button className="btn">
@@ -552,6 +552,7 @@ function LessonPreviewPage() {
 
 /* ---- QUIZZES ---- */
 function QuizzesPage() {
+  const navigate = useNavigate();
   const quizzes = [
     {
       id: 1,
@@ -691,7 +692,7 @@ function QuizzesPage() {
             ))}
           </div>
           <div className="ms-4">
-            <Button size="sm" variant="outline-secondary" className="me-2">Preview</Button>
+            <Button size="sm" variant="outline-secondary" className="me-2" onClick={() => navigate(`/quizzes/preview/${q.id}`)}>Preview</Button>
             <Button size="sm" variant="outline-primary" className="me-2">Edit</Button>
             {q.status === "active" ? (
               <Button size="sm" variant="outline-danger">Close</Button>
@@ -704,6 +705,284 @@ function QuizzesPage() {
     </div>
   );
 }
+
+function QuizPreviewPage() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const quizzes = [
+    {
+      id: 1,
+      title: "Algebra Fundamentals",
+      status: "active",
+      desc: "Test your understanding of basic algebraic concepts",
+      questions: 10,
+      duration: "30 min",
+      due: "2024-01-25",
+      completed: "18/25",
+      tags: ["Math 101", "Math 102"],
+      questionsList: [
+        "Simplify: 2x + 3x",
+        "Solve for x: x + 5 = 12",
+        "Factor: x^2 + 5x + 6",
+        "Find x: 2x - 4 = 10",
+        "Simplify: 3(a + 4) - 2a",
+        "Solve: 3x + 7 = 16",
+        "Factor: x^2 - 9",
+        "Find y if 2y + 3 = 11",
+        "Simplify: 5x - 2x + 4",
+        "Solve: 4x/2 = 8"
+      ]
+    },
+    {
+      id: 2,
+      title: "Cell Biology Quiz",
+      status: "draft",
+      desc: "Assessment on cell structure and organelles",
+      questions: 10,
+      duration: "45 min",
+      due: "2024-01-30",
+      completed: "0/22",
+      tags: ["Biology A"],
+      questionsList: [
+        "What is the function of the nucleus?",
+        "Name the organelle responsible for energy production",
+        "Define cytoplasm",
+        "What structure controls what enters/exits a cell?",
+        "Which organelle is responsible for protein synthesis?",
+        "Describe the difference between plant and animal cells",
+        "What is the function of mitochondria?",
+        "Define endoplasmic reticulum",
+        "What is the role of ribosomes?",
+        "Explain the function of lysosomes"
+      ]
+    },
+    {
+      id: 3,
+      title: "World War II History",
+      status: "active",
+      desc: "Covers major events and leaders of WWII",
+      questions: 10,
+      duration: "40 min",
+      due: "2024-02-05",
+      completed: "30/40",
+      tags: ["History 201"],
+      questionsList: [
+        "When did World War II begin?",
+        "Which countries were part of the Axis powers?",
+        "Who was the Prime Minister of the UK during WWII?",
+        "Name the US President during most of WWII",
+        "What was D-Day?",
+        "Explain the significance of Pearl Harbor",
+        "Who was Adolf Hitler?",
+        "Describe the Holocaust",
+        "Which battle is considered a turning point in the Pacific?",
+        "When did WWII end?"
+      ]
+    },
+    {
+      id: 4,
+      title: "Shakespeare’s Plays",
+      status: "archived",
+      desc: "Quiz on themes, characters, and works of Shakespeare",
+      questions: 10,
+      duration: "50 min",
+      due: "2023-12-15",
+      completed: "45/50",
+      tags: ["English Literature"],
+      questionsList: [
+        "Name three tragedies by Shakespeare",
+        "Who is the protagonist in Macbeth?",
+        "Which play features the characters Rosencrantz and Guildenstern?",
+        "Define iambic pentameter",
+        "Who wrote 'Romeo and Juliet'?",
+        "What is the main theme of 'Othello'?",
+        "Identify a famous soliloquy from Hamlet",
+        "What role does Puck play in 'A Midsummer Night's Dream'?",
+        "Who are the star-crossed lovers?",
+        "What is the meaning of 'All the world's a stage'?"
+      ]
+    },
+    {
+      id: 5,
+      title: "Introduction to Programming",
+      status: "active",
+      desc: "Covers basic Python syntax and problem solving",
+      questions: 10,
+      duration: "60 min",
+      due: "2024-02-10",
+      completed: "12/30",
+      tags: ["Computer Science", "Python"],
+      questionsList: [
+        "What is a variable in Python?",
+        "How do you write a comment in Python?",
+        "What is the output of print(2 + 3 * 4)?",
+        "Define a function in Python",
+        "What does 'if' statement do?",
+        "Explain a 'for' loop",
+        "How do you create a list?",
+        "What is a dictionary in Python?",
+        "Explain the difference between '==' and '='",
+        "Write a Python program to add two numbers"
+      ]
+    },
+    {
+      id: 6,
+      title: "Geometry Challenge",
+      status: "draft",
+      desc: "Covers angles, triangles, and circle theorems",
+      questions: 10,
+      duration: "35 min",
+      due: "2024-02-20",
+      completed: "0/28",
+      tags: ["Math 103"],
+      questionsList: [
+        "Calculate the sum of angles in a triangle",
+        "Define an isosceles triangle",
+        "What is the area of a circle?",
+        "Explain the Pythagorean theorem",
+        "Define a right-angled triangle",
+        "What is the circumference of a circle?",
+        "Find the missing angle in a triangle if two angles are 50° and 60°",
+        "Define acute, obtuse, and right angles",
+        "What is a tangent of a circle?",
+        "Calculate the perimeter of a square with side 5"
+      ]
+    },
+    {
+      id: 7,
+      title: "Environmental Science Basics",
+      status: "active",
+      desc: "Covers ecosystems, climate, and conservation",
+      questions: 10,
+      duration: "40 min",
+      due: "2024-02-18",
+      completed: "20/30",
+      tags: ["Science 202"],
+      questionsList: [
+        "Define ecosystem",
+        "What is biodiversity?",
+        "Name three types of renewable energy",
+        "Explain global warming",
+        "What is deforestation?",
+        "Describe the water cycle",
+        "What is a food chain?",
+        "Name two greenhouse gases",
+        "Explain conservation of natural resources",
+        "What is pollution?"
+      ]
+    },
+    {
+      id: 8,
+      title: "Grammar and Vocabulary",
+      status: "active",
+      desc: "Tests grammar rules, synonyms, and antonyms",
+      questions: 10,
+      duration: "55 min",
+      due: "2024-03-01",
+      completed: "15/25",
+      tags: ["English 101"],
+      questionsList: [
+        "Define a noun",
+        "Give an example of a verb",
+        "What is an adjective?",
+        "Find the synonym of 'happy'",
+        "Find the antonym of 'cold'",
+        "Correct the sentence: 'She don't like apples.'",
+        "Identify the subject in: 'John runs fast.'",
+        "What is a preposition?",
+        "Write a sentence using an adverb",
+        "Correct the tense: 'I go to school yesterday.'"
+      ]
+    },
+    {
+      id: 9,
+      title: "Economics Principles",
+      status: "draft",
+      desc: "Quiz on supply, demand, and basic market concepts",
+      questions: 10,
+      duration: "50 min",
+      due: "2024-03-10",
+      completed: "0/18",
+      tags: ["Economics A"],
+      questionsList: [
+        "Define supply",
+        "Define demand",
+        "What is market equilibrium?",
+        "Explain the law of demand",
+        "Explain the law of supply",
+        "What is opportunity cost?",
+        "Define inflation",
+        "What is GDP?",
+        "Explain scarcity",
+        "Give an example of a price ceiling"
+      ]
+    },
+    {
+      id: 10,
+      title: "Chemistry Reactions",
+      status: "active",
+      desc: "Assessment on acids, bases, and chemical reactions",
+      questions: 10,
+      duration: "60 min",
+      due: "2024-03-15",
+      completed: "8/25",
+      tags: ["Chemistry 101"],
+      questionsList: [
+        "Define an acid",
+        "Define a base",
+        "What is a neutralization reaction?",
+        "Write the equation for HCl + NaOH",
+        "Define oxidation",
+        "Define reduction",
+        "What is a catalyst?",
+        "Explain endothermic reaction",
+        "Explain exothermic reaction",
+        "What is a chemical equation?"
+      ]
+    }
+  ];
+
+  const quiz = quizzes.find((q) => q.id === parseInt(id));
+
+  if (!quiz) return <div className="mt-4">Quiz not found!</div>;
+
+  return (
+    <div className="d-flex justify-content-center">
+      <div className="my-2" style={{ width: "700px" }}>
+        <Card className="p-4 shadow-1">
+          <h3>{quiz.title} <Badge bg={quiz.status}>{quiz.status}</Badge></h3>
+          <p className="text-secondary">{quiz.desc}</p>
+          <p>
+            <strong>Questions:</strong> {quiz.questions} <br />
+            <strong>Duration:</strong> {quiz.duration} <br />
+            <strong>Due Date:</strong> {quiz.due} <br />
+            <strong>Completed:</strong> {quiz.completed}
+          </p>
+          <div className="mb-1">
+            {quiz.tags.map((t) => (
+              <Badge key={t} bg="light" text="dark" className="me-2">{t}</Badge>
+            ))}
+          </div>
+
+          <Card className="p-3 shadow-1 my-2">
+            <h5>Sample Questions Assigned</h5>
+            <ol>
+              {quiz.questionsList.map((q, idx) => (
+                <li key={idx}>{q}</li>
+              ))}
+            </ol>
+          </Card>
+
+          <Button variant="dark" className="mt-2" onClick={() => navigate(-1)}>
+            ← Back
+          </Button>
+        </Card>
+      </div>
+    </div>
+  );
+}
+
 
 /* ---- PROGRESS ---- */
 function ProgressPage() {
@@ -1332,7 +1611,7 @@ function AdminLogin() {
           </div>
         ))}
       </div>
-    
+
     </div>
   );
 }
@@ -1776,6 +2055,7 @@ export default function App() {
 
 
         <Route path="/lesson/:id" element={<LessonPreviewPage />} />
+        <Route path="/quizzes/preview/:id" element={<QuizPreviewPage />} />
 
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route
