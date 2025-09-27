@@ -529,9 +529,9 @@ function LessonPreviewPage() {
 
   return (
     <div className="container d-flex justify-content-center preview">
-      <Card className="p-4 preview-body mb-3" style={{ width: "400px" }}>
+      <Card className="p-4 preview-body mb-3" style={{ width: "450px" }}>
         <h3 className="mb-3">{lesson.title}</h3>
-        <img src="/pdf.png" />
+        <img src="/video.jpg" />
         <div className="mt-2">
           <Badge bg="secondary" className="text-capitalize me-2" style={{ width: "100px" }}>{lesson.subject}</Badge>
           <Badge bg={lesson.status === "published" ? "dark" : "secondary"} className="text-capitalize">
