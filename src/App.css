@@ -5,3 +5,10 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
+
+.student{
+    background-color: #fcfcfe !important;
+}
+.quiz{
+    background-color: #fcfcfe !important;
+}

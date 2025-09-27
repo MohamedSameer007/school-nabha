@@ -44,11 +44,18 @@ function Navbar() {
         School Nabha
       </RBNavbar.Brand>
       <Nav className="ms-auto">
+        <button className="btn">
+          go to →
+        </button>
         <Nav.Link as={Link} to="/teacher/login">
+        <button className="btn btn-outline-dark">
           Teacher Login
+        </button>
         </Nav.Link>
         <Nav.Link as={Link} to="/admin/login">
-          Admin Login
+          <button className="btn btn-outline-dark">
+            Admin Login
+          </button>
         </Nav.Link>
       </Nav>
     </RBNavbar>
@@ -68,46 +75,6 @@ function StatsCard({ label, value, icon }) {
 }
 
 /* -------------------- LOGIN -------------------- */
-// function TeacherLogin() {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const navigate = useNavigate();
-
-//   const handleLogin = (e) => {
-//     e.preventDefault();
-//     localStorage.setItem("teacher", JSON.stringify({ email }));
-//     navigate("/teacher/dashboard");
-//   };
-
-//   return (
-//     <div className="container" style={{ maxWidth: 400 }}>
-//       <h2>Teacher Login</h2>
-//       <Form onSubmit={handleLogin}>
-//         <Form.Group className="mb-3">
-//           <Form.Label>Email</Form.Label>
-//           <Form.Control
-//             type="email"
-//             value={email}
-//             onChange={(e) => setEmail(e.target.value)}
-//             required
-//           />
-//         </Form.Group>
-//         <Form.Group className="mb-3">
-//           <Form.Label>Password</Form.Label>
-//           <Form.Control
-//             type="password"
-//             value={password}
-//             onChange={(e) => setPassword(e.target.value)}
-//             required
-//           />
-//         </Form.Group>
-//         <Button type="submit" variant="primary" className="w-100">
-//           Login
-//         </Button>
-//       </Form>
-//     </div>
-//   );
-// }
 function TeacherLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -126,7 +93,7 @@ function TeacherLogin() {
   ];
 
   const useDemo = (account) => {
-     localStorage.setItem("teacher", JSON.stringify({ email: account.email }));
+    localStorage.setItem("teacher", JSON.stringify({ email: account.email }));
     navigate("/teacher/dashboard"); // ➡️ Go straight to dashboard
     window.location.reload();
   };
@@ -233,9 +200,9 @@ function OverviewTab({ setActiveTab }) {
     <>
       <Row className="mt-4 mb-3">
         <Col><StatsCard label="Active Lessons" value="12" icon="📘" /></Col>
-        <Col><StatsCard label="Total Students" value="84" icon="🧑‍🎓" /></Col>
-        <Col><StatsCard label="Pending Quizzes" value="5" icon="⏰" /></Col>
-        <Col><StatsCard label="Completed Assignments" value="50" icon="✔️" /></Col>
+        <Col><StatsCard label="Total Students" value="85" icon="🧑‍🎓" /></Col>
+        <Col><StatsCard label="Student Completed" value="45" icon="✔️" /></Col>
+        <Col><StatsCard label="Student Not Completed" value="40" icon="❌" /></Col>
       </Row>
 
       <Card className="p-3 mb-2">
@@ -397,7 +364,7 @@ function LessonsPage() {
     <div className="mt-4">
       <h3 className="mb-3">Lesson Management</h3>
       {lessons.map((l) => (
-        <Card key={l.id} className="p-3 mb-3">
+        <Card key={l.id} className="p-3 mb-3 mx-3 quiz">
           <h5 className="mb-0 d-flex align-items-center">
             <span className="me-2 fs-5">📄</span>
             {l.title}
@@ -411,7 +378,7 @@ function LessonsPage() {
           <div className="ms-4 mb-2 text-secondary">{l.desc}</div>
           <div className="ms-4 d-flex align-items-center text-secondary mb-2">
             📅 {l.date} &nbsp;•&nbsp; 👁️ {l.views} views
-            <Badge bg="light" text="dark" className="ms-3">
+            <Badge bg="light" text="dark" className="ms-3 p-2">
               {l.subject}
             </Badge>
           </div>
@@ -555,7 +522,7 @@ function QuizzesPage() {
     <div className="mt-4">
       <h3 className="mb-3">Quiz Management</h3>
       {quizzes.map((q) => (
-        <Card key={q.id} className="p-3 mb-3">
+        <Card key={q.id} className="p-3 mb-3 mx-3 quiz">
           <h5 className="mb-0 d-flex align-items-center">
             <span className="me-2 fs-5">📝</span>
             {q.title}
@@ -591,17 +558,16 @@ function QuizzesPage() {
 }
 
 /* ---- PROGRESS ---- */
-
 function ProgressPage() {
   // 🔹 Demo Data (replace with API data later)
   const weeklyActivity = [
-    { day: "Mon", active: 3 },
-    { day: "Tue", active: 4 },
-    { day: "Wed", active: 2 },
-    { day: "Thu", active: 5 },
-    { day: "Fri", active: 4 },
-    { day: "Sat", active: 3 },
-    { day: "Sun", active: 2 },
+    { day: "Mon", active: 32 },
+    { day: "Tue", active: 41 },
+    { day: "Wed", active: 23 },
+    { day: "Thu", active: 59 },
+    { day: "Fri", active: 43 },
+    { day: "Sat", active: 39 },
+    { day: "Sun", active: 34 },
   ];
 
   const subjectPerformance = [
@@ -648,7 +614,152 @@ function ProgressPage() {
       status: "Behind",
       lastActivity: "3 days ago",
     },
+    {
+      id: 4,
+      name: "David Miller",
+      email: "david.m@student.edu",
+      lessons: 9,
+      totalLessons: 10,
+      quizzes: 6,
+      totalQuizzes: 6,
+      avgScore: 95,
+      status: "Ahead",
+      lastActivity: "1 hour ago",
+    },
+    {
+      id: 5,
+      name: "Emma Wilson",
+      email: "emma.w@student.edu",
+      lessons: 7,
+      totalLessons: 10,
+      quizzes: 5,
+      totalQuizzes: 6,
+      avgScore: 84,
+      status: "On Track",
+      lastActivity: "5 hours ago",
+    },
+    {
+      id: 6,
+      name: "Frank Harris",
+      email: "frank.h@student.edu",
+      lessons: 5,
+      totalLessons: 10,
+      quizzes: 3,
+      totalQuizzes: 6,
+      avgScore: 68,
+      status: "Behind",
+      lastActivity: "2 days ago",
+    },
+    {
+      id: 7,
+      name: "Grace Lee",
+      email: "grace.l@student.edu",
+      lessons: 10,
+      totalLessons: 10,
+      quizzes: 6,
+      totalQuizzes: 6,
+      avgScore: 99,
+      status: "Ahead",
+      lastActivity: "30 minutes ago",
+    },
+    {
+      id: 8,
+      name: "Henry Clark",
+      email: "henry.c@student.edu",
+      lessons: 6,
+      totalLessons: 10,
+      quizzes: 4,
+      totalQuizzes: 6,
+      avgScore: 80,
+      status: "On Track",
+      lastActivity: "8 hours ago",
+    },
+    {
+      id: 9,
+      name: "Isabella Moore",
+      email: "isabella.m@student.edu",
+      lessons: 3,
+      totalLessons: 10,
+      quizzes: 1,
+      totalQuizzes: 6,
+      avgScore: 55,
+      status: "Behind",
+      lastActivity: "5 days ago",
+    },
+    {
+      id: 10,
+      name: "Jack Thompson",
+      email: "jack.t@student.edu",
+      lessons: 8,
+      totalLessons: 10,
+      quizzes: 5,
+      totalQuizzes: 6,
+      avgScore: 90,
+      status: "Ahead",
+      lastActivity: "4 hours ago",
+    },
+    {
+      id: 11,
+      name: "Katie Anderson",
+      email: "katie.a@student.edu",
+      lessons: 7,
+      totalLessons: 10,
+      quizzes: 4,
+      totalQuizzes: 6,
+      avgScore: 82,
+      status: "On Track",
+      lastActivity: "12 hours ago",
+    },
+    {
+      id: 12,
+      name: "Leo Martinez",
+      email: "leo.m@student.edu",
+      lessons: 5,
+      totalLessons: 10,
+      quizzes: 3,
+      totalQuizzes: 6,
+      avgScore: 70,
+      status: "Behind",
+      lastActivity: "4 days ago",
+    },
+    {
+      id: 13,
+      name: "Mia Perez",
+      email: "mia.p@student.edu",
+      lessons: 9,
+      totalLessons: 10,
+      quizzes: 6,
+      totalQuizzes: 6,
+      avgScore: 96,
+      status: "Ahead",
+      lastActivity: "1 hour ago",
+    },
+    {
+      id: 14,
+      name: "Noah Wright",
+      email: "noah.w@student.edu",
+      lessons: 6,
+      totalLessons: 10,
+      quizzes: 4,
+      totalQuizzes: 6,
+      avgScore: 79,
+      status: "On Track",
+      lastActivity: "20 hours ago",
+    },
+    {
+      id: 15,
+      name: "Olivia Scott",
+      email: "olivia.s@student.edu",
+      lessons: 4,
+      totalLessons: 10,
+      quizzes: 2,
+      totalQuizzes: 6,
+      avgScore: 62,
+      status: "Behind",
+      lastActivity: "6 days ago",
+    },
   ];
+
 
   const completionData = [
     { name: "Completed", value: 68, color: "#28a745" },
@@ -663,16 +774,16 @@ function ProgressPage() {
       {/* ===== Stats Cards ===== */}
       <Row className="mb-4">
         <Col>
-          <StatsCard label="Total Students" value="4" icon="👥" />
+          <StatsCard label="Total Students" value="85" icon="👥" />
         </Col>
         <Col>
           <StatsCard label="Avg Completion" value="68%" icon="📚" />
         </Col>
         <Col>
-          <StatsCard label="Avg Score" value="81%" icon="🏆" />
+          <StatsCard label="Avg Performance" value="81%" icon="🏆" />
         </Col>
         <Col>
-          <StatsCard label="Active Today" value="2" icon="⏳" />
+          <StatsCard label="Active Today" value="32" icon="⏳" />
         </Col>
       </Row>
 
@@ -727,7 +838,7 @@ function ProgressPage() {
         {/* Left - Student List */}
         <Col md={8}>
           {students.map((s) => (
-            <Card key={s.id} className="p-3 mb-3">
+            <Card key={s.id} className="p-3 mb-3 student">
               <div className="d-flex align-items-center">
                 <div
                   className="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-3"
@@ -738,7 +849,7 @@ function ProgressPage() {
                     .map((n) => n[0])
                     .join("")}
                 </div>
-                <div style={{ flex: 1 }}>
+                <div style={{ flex: 1 }} className="">
                   <h5 className="mb-1">{s.name}</h5>
                   <div className="text-secondary small">{s.email}</div>
                   <div className="d-flex flex-wrap mt-2">
@@ -997,48 +1108,7 @@ function CreateQuizPage() {
   );
 }
 
-
 /* -------------------- ADMIN -------------------- */
-// function AdminLogin() {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const navigate = useNavigate();
-
-//   const handleLogin = (e) => {
-//     e.preventDefault();
-//     localStorage.setItem("admin", JSON.stringify({ email }));
-//     navigate("/admin/dashboard");
-//   };
-
-//   return (
-//     <div className="container" style={{ maxWidth: 400 }}>
-//       <h2>Admin Login</h2>
-//       <Form onSubmit={handleLogin}>
-//         <Form.Group className="mb-3">
-//           <Form.Label>Email</Form.Label>
-//           <Form.Control
-//             type="email"
-//             value={email}
-//             onChange={(e) => setEmail(e.target.value)}
-//             required
-//           />
-//         </Form.Group>
-//         <Form.Group className="mb-3">
-//           <Form.Label>Password</Form.Label>
-//           <Form.Control
-//             type="password"
-//             value={password}
-//             onChange={(e) => setPassword(e.target.value)}
-//             required
-//           />
-//         </Form.Group>
-//         <Button type="submit" variant="primary" className="w-100">
-//           Login
-//         </Button>
-//       </Form>
-//     </div>
-//   );
-// }
 function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -1057,7 +1127,7 @@ function AdminLogin() {
   ];
 
   const useDemo = (account) => {
-      localStorage.setItem("admin", JSON.stringify({ email: account.email }));
+    localStorage.setItem("admin", JSON.stringify({ email: account.email }));
     navigate("/admin/dashboard"); // ➡️ Go straight to dashboard
     window.location.reload();
   };
@@ -1117,8 +1187,6 @@ function AdminLogin() {
     </div>
   );
 }
-
-
 
 function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -1321,12 +1389,22 @@ function AdminDashboard() {
   // ✅ Download Helper
   const downloadReport = (type) => {
     const data = type === "teachers" ? teachers : students;
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+
+    // Create CSV header from object keys
+    const keys = Object.keys(data[0]);
+    const csvRows = [
+      keys.join(","), // header
+      ...data.map(row => keys.map(k => JSON.stringify(row[k] ?? "")).join(",")),
+    ];
+    const csv = csvRows.join("\n");
+
+    const blob = new Blob([csv], { type: "text/csv" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = `${type}_report.json`;
+    link.download = `${type}_report.csv`;
     link.click();
   };
+
 
   return (
     <div className="container-fluid mt-3">
@@ -1410,7 +1488,7 @@ function AdminDashboard() {
         <div>
           <h4>Teacher Management</h4>
           {teachers.map((t) => (
-            <Card key={t.id} className="p-3 mb-3">
+            <Card key={t.id} className="p-3 mb-3 quiz">
               <div className="d-flex align-items-center">
                 <div
                   className="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-3"
@@ -1440,7 +1518,7 @@ function AdminDashboard() {
         <div>
           <h4>Student Management</h4>
           {students.map((s) => (
-            <Card key={s.id} className="p-3 mb-3">
+            <Card key={s.id} className="p-3 mb-3 quiz">
               <div className="d-flex align-items-center">
                 <div
                   className="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-3"
@@ -1490,7 +1568,6 @@ function AdminDashboard() {
   );
 }
 
-
 /* -------------------- LANDING -------------------- */
 function LandingPage() {
   return (
@@ -1505,7 +1582,6 @@ function LandingPage() {
 export default function App() {
   const teacherLoggedIn = !!localStorage.getItem("teacher");
   const adminLoggedIn = !!localStorage.getItem("admin");
-
   return (
     <Router>
       <Navbar />
