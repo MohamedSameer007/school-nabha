@@ -1432,24 +1432,24 @@ function AdminDashboard() {
           {/* Quick Actions */}
           <Row className="mb-4">
             <Col>
-              <Button className="w-100 p-3">
+              <button className="w-100 p-3 btn btn-outline-dark">
                 🏫 School Overview
-              </Button>
+              </button>
             </Col>
             <Col>
-              <Button className="w-100 p-3" onClick={() => setActiveTab("teachers")}>
+              <button className="w-100 p-3 btn btn-outline-dark" onClick={() => setActiveTab("teachers")}>
                 👨‍🏫 Manage Teachers
-              </Button>
+              </button>
             </Col>
             <Col>
-              <Button className="w-100 p-3" onClick={() => setActiveTab("students")}>
+              <button className="w-100 p-3 btn btn-outline-dark" onClick={() => setActiveTab("students")}>
                 👩‍🎓 Manage Students
-              </Button>
+              </button>
             </Col>
             <Col>
-              <Button className="w-100 p-3" onClick={() => setActiveTab("reports")}>
+              <button className="w-100 p-3 btn btn-outline-dark" onClick={() => setActiveTab("reports")}>
                 📊 View Reports
-              </Button>
+              </button>
             </Col>
           </Row>
 
@@ -1571,7 +1571,8 @@ function AdminDashboard() {
 /* -------------------- LANDING -------------------- */
 function LandingPage() {
   return (
-    <div className="container text-center mt-5">
+    <div className="">
+    <div className="container text-center pt-5 mt-5">
       <h1>Welcome to School Nabha</h1>
       <p>use the below button to login as Teacher or Admin.</p>
       <p>↓</p>
@@ -1589,7 +1590,7 @@ function LandingPage() {
         </Nav.Link>
       </div>
     </div>
-    
+    </div>
   );
 }
 
