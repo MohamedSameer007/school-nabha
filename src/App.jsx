@@ -34,6 +34,7 @@ import {
   Bar,
   Legend,
 } from "recharts";
+import { useParams } from "react-router-dom";
 
 
 /* -------------------- NAVBAR -------------------- */
@@ -41,16 +42,16 @@ function Navbar() {
   return (
     <RBNavbar bg="light" expand="lg" className="mb-3 px-3">
       <RBNavbar.Brand as={Link} to="/">
-        School Nabha
+      School Nabha
       </RBNavbar.Brand>
       <Nav className="ms-auto">
         <button className="btn">
           go to →
         </button>
         <Nav.Link as={Link} to="/teacher/login">
-        <button className="btn btn-outline-dark">
-          Teacher Login
-        </button>
+          <button className="btn btn-outline-dark">
+            Teacher Login
+          </button>
         </Nav.Link>
         <Nav.Link as={Link} to="/admin/login">
           <button className="btn btn-outline-dark">
@@ -64,7 +65,7 @@ function Navbar() {
 
 function StatsCard({ label, value, icon }) {
   return (
-    <Card text="center" className="m-2 p-3" style={{ minWidth: "130px" }}>
+    <Card text="center shadow" className="m-2 p-3" style={{ minWidth: "130px" }}>
       <Card.Body>
         <div style={{ fontSize: "2rem" }}>{icon}</div>
         <div className="h6 mt-2">{label}</div>
@@ -101,8 +102,8 @@ function TeacherLogin() {
   return (
     <div className="d-flex flex-column justify-content-center align-items-center p-4">
       {/* ---- Login Box ---- */}
-      <div className="container p-4 shadow rounded bg-white my-5" style={{ maxWidth: 400 }}>
-        <h2 className="mb-3">Teacher Login</h2>
+      <div className="container p-4 shadow rounded bg-white my-4" style={{ maxWidth: 400 }}>
+        <h2 className="mb-1">Teacher Login</h2>
         <Form onSubmit={handleLogin}>
           <Form.Group className="mb-3">
             <Form.Label>Email</Form.Label>
@@ -131,7 +132,7 @@ function TeacherLogin() {
       </div>
 
       {/* ---- Demo Accounts ---- */}
-      <div className="">
+      <div className="shadow py-4 px-5 rounded">
         <h5 className="mb-3">Demo Accounts</h5>
         {demoAccounts.map((acc) => (
           <div
@@ -166,7 +167,7 @@ function TeacherDashboard() {
   return (
     <div className="container-fluid mt-3">
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2>Teacher Dashboard</h2>
+        <h2 className="shadow-3">Teacher Dashboard</h2>
         <Button variant="outline-danger" onClick={handleLogout}>
           Sign Out
         </Button>
@@ -224,7 +225,7 @@ function OverviewTab({ setActiveTab }) {
           <Col xs={12} md={4} className="mb-2">
             <Button
               variant="outline-dark"
-              className="w-100 py-3"
+              className="w-100 py-3 shadow"
               onClick={() => navigate("/teacher/create-quiz")}
             >
               Create Quiz
@@ -233,7 +234,7 @@ function OverviewTab({ setActiveTab }) {
           <Col xs={12} md={4} className="mb-2">
             <Button
               variant="outline-dark"
-              className="w-100 py-3"
+              className="w-100 py-3 shadow"
               onClick={() => setActiveTab("progress")} // <-- switches to Progress tab
             >
               View Progress
@@ -248,6 +249,7 @@ function OverviewTab({ setActiveTab }) {
 
 /* ---- LESSONS ---- */
 function LessonsPage() {
+  const navigate = useNavigate();
   const lessons = [
     {
       id: 1,
@@ -364,7 +366,7 @@ function LessonsPage() {
     <div className="mt-4">
       <h3 className="mb-3">Lesson Management</h3>
       {lessons.map((l) => (
-        <Card key={l.id} className="p-3 mb-3 mx-3 quiz">
+        <Card key={l.id} className="p-3 mb-3 mx-3 quiz shadow-1">
           <h5 className="mb-0 d-flex align-items-center">
             <span className="me-2 fs-5">📄</span>
             {l.title}
@@ -383,7 +385,8 @@ function LessonsPage() {
             </Badge>
           </div>
           <div className="ms-4">
-            <Button size="sm" variant="outline-secondary" className="me-2">Preview</Button>
+            <Button size="sm" variant="outline-secondary" className="me-2" onClick={() => navigate(`/lesson/${l.id}`)}
+            >Preview</Button>
             <Button size="sm" variant="outline-primary" className="me-2">Edit</Button>
             {l.status === "published" ? (
               <Button size="sm" variant="outline-warning" className="me-2">
@@ -398,6 +401,151 @@ function LessonsPage() {
           </div>
         </Card>
       ))}
+    </div>
+  );
+}
+
+
+function LessonPreviewPage() {
+
+  const lessons = [
+    {
+      id: 1,
+      title: "Introduction to Algebra",
+      desc: "Basic concepts of algebraic expressions and equations",
+      date: "2024-01-15",
+      views: 45,
+      subject: "Mathematics",
+      status: "published",
+    },
+    {
+      id: 2,
+      title: "Cell Structure and Function",
+      desc: "Detailed study of plant and animal cell components",
+      date: "2024-01-14",
+      views: 32,
+      subject: "Biology",
+      status: "published",
+    },
+    {
+      id: 3,
+      title: "Shakespeare's Hamlet - Act 1",
+      desc: "Analysis of characters and themes in Hamlet",
+      date: "2024-01-13",
+      views: 0,
+      subject: "Literature",
+      status: "draft",
+    },
+    {
+      id: 4,
+      title: "Newton's Laws of Motion",
+      desc: "Understanding the three fundamental laws of motion",
+      date: "2024-01-16",
+      views: 27,
+      subject: "Physics",
+      status: "published",
+    },
+    {
+      id: 5,
+      title: "Introduction to Chemical Bonds",
+      desc: "Ionic, covalent, and metallic bonds explained",
+      date: "2024-01-17",
+      views: 14,
+      subject: "Chemistry",
+      status: "published",
+    },
+    {
+      id: 6,
+      title: "World War II Overview",
+      desc: "Major events and consequences of World War II",
+      date: "2024-01-18",
+      views: 22,
+      subject: "History",
+      status: "published",
+    },
+    {
+      id: 7,
+      title: "Pythagorean Theorem",
+      desc: "Understanding the relationship between sides of a right triangle",
+      date: "2024-01-19",
+      views: 35,
+      subject: "Mathematics",
+      status: "published",
+    },
+    {
+      id: 8,
+      title: "Photosynthesis Process",
+      desc: "Detailed explanation of how plants produce energy",
+      date: "2024-01-20",
+      views: 18,
+      subject: "Biology",
+      status: "draft",
+    },
+    {
+      id: 9,
+      title: "Romeo and Juliet - Act 2",
+      desc: "Analysis of love and conflict in Act 2",
+      date: "2024-01-21",
+      views: 5,
+      subject: "Literature",
+      status: "published",
+    },
+    {
+      id: 10,
+      title: "Electromagnetic Waves",
+      desc: "Types, properties, and applications of EM waves",
+      date: "2024-01-22",
+      views: 12,
+      subject: "Physics",
+      status: "draft",
+    },
+    {
+      id: 11,
+      title: "Acid-Base Reactions",
+      desc: "Concepts of acids, bases, and neutralization reactions",
+      date: "2024-01-23",
+      views: 8,
+      subject: "Chemistry",
+      status: "published",
+    },
+    {
+      id: 12,
+      title: "Indian Independence Movement",
+      desc: "Key events and leaders in India's struggle for freedom",
+      date: "2024-01-24",
+      views: 30,
+      subject: "History",
+      status: "published",
+    }
+  ];
+
+  const { id } = useParams();       // get lesson id from URL
+  const navigate = useNavigate();
+  const lesson = lessons.find(l => l.id === Number(id));
+
+  if (!lesson) {
+    return <div className="container mt-4">Lesson not found</div>;
+  }
+
+  return (
+    <div className="container d-flex justify-content-center preview">
+      <Card className="p-4 preview-body mb-3" style={{ width: "400px" }}>
+        <h3 className="mb-3">{lesson.title}</h3>
+        <img src="/pdf.png" />
+        <div className="mt-2">
+          <Badge bg="secondary" className="text-capitalize me-2" style={{ width: "100px" }}>{lesson.subject}</Badge>
+          <Badge bg={lesson.status === "published" ? "dark" : "secondary"} className="text-capitalize">
+            {lesson.status}
+          </Badge>
+        </div>
+        <p className="text-secondary mt-3">{lesson.desc}</p>
+
+        <div className="text-secondary mb-3">
+          📅 {lesson.date} &nbsp;•&nbsp; 👁️ {lesson.views} views
+        </div>
+
+        <Button variant="outline-dark" onClick={() => navigate(-1)}>Back</Button>
+      </Card>
     </div>
   );
 }
@@ -522,7 +670,7 @@ function QuizzesPage() {
     <div className="mt-4">
       <h3 className="mb-3">Quiz Management</h3>
       {quizzes.map((q) => (
-        <Card key={q.id} className="p-3 mb-3 mx-3 quiz">
+        <Card key={q.id} className="p-3 mb-3 mx-3 quiz shadow-1">
           <h5 className="mb-0 d-flex align-items-center">
             <span className="me-2 fs-5">📝</span>
             {q.title}
@@ -838,7 +986,7 @@ function ProgressPage() {
         {/* Left - Student List */}
         <Col md={8}>
           {students.map((s) => (
-            <Card key={s.id} className="p-3 mb-3 student">
+            <Card key={s.id} className="p-3 mb-3 student shadow-1">
               <div className="d-flex align-items-center">
                 <div
                   className="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-3"
@@ -947,7 +1095,7 @@ function UploadLessonPage() {
 
   return (
     <div className="container-fluid mt-3">
-      <Card className="p-4" style={{ maxWidth: 600, margin: "auto" }}>
+      <Card className="p-4 shadow" style={{ maxWidth: 600, margin: "auto" }}>
         <h3>Upload New Lesson</h3>
         <Form>
           <Form.Group className="mb-3">
@@ -1034,7 +1182,7 @@ function CreateQuizPage() {
 
   return (
     <div className="container-fluid mt-3">
-      <Card className="p-4" style={{ maxWidth: 800, margin: "auto" }}>
+      <Card className="p-4 shadow my-3" style={{ maxWidth: 800, margin: "auto" }}>
         <h3>Create New Quiz</h3>
         <Form onSubmit={handleSubmit}>
           {/* Quiz title */}
@@ -1135,8 +1283,8 @@ function AdminLogin() {
   return (
     <div className="d-flex flex-column justify-content-center align-items-center p-4">
       {/* ---- Login Box ---- */}
-      <div className="container p-4 shadow rounded bg-white my-5" style={{ maxWidth: 400 }}>
-        <h2 className="mb-3">Admin Login</h2>
+      <div className="container p-4 shadow rounded bg-white my-4" style={{ maxWidth: 400 }}>
+        <h2 className="mb-1">Admin Login</h2>
         <Form onSubmit={handleLogin}>
           <Form.Group className="mb-3">
             <Form.Label>Email</Form.Label>
@@ -1165,7 +1313,7 @@ function AdminLogin() {
       </div>
 
       {/* ---- Demo Accounts ---- */}
-      <div className="">
+      <div className="shadow py-4 px-5 rounded">
         <h5 className="mb-3">Demo Accounts</h5>
         {demoAccounts.map((acc) => (
           <div
@@ -1184,6 +1332,7 @@ function AdminLogin() {
           </div>
         ))}
       </div>
+    
     </div>
   );
 }
@@ -1437,30 +1586,30 @@ function AdminDashboard() {
               </button>
             </Col>
             <Col>
-              <button className="w-100 p-3 btn btn-outline-dark" onClick={() => setActiveTab("teachers")}>
+              <button className="w-100 p-3 btn btn-outline-dark shadow" onClick={() => setActiveTab("teachers")}>
                 👨‍🏫 Manage Teachers
               </button>
             </Col>
             <Col>
-              <button className="w-100 p-3 btn btn-outline-dark" onClick={() => setActiveTab("students")}>
+              <button className="w-100 p-3 btn btn-outline-dark shadow" onClick={() => setActiveTab("students")}>
                 👩‍🎓 Manage Students
               </button>
             </Col>
             <Col>
-              <button className="w-100 p-3 btn btn-outline-dark" onClick={() => setActiveTab("reports")}>
+              <button className="w-100 p-3 btn btn-outline-dark shadow" onClick={() => setActiveTab("reports")}>
                 📊 View Reports
               </button>
             </Col>
           </Row>
 
 
-          <Row>
+          <Row className="mt-3">
             {/* Recent Activity */}
             <Col md={6}>
-              <Card className="p-3">
+              <Card className="p-4 shadow">
                 <h5>Recent Activity</h5>
                 {recentActivity.map((a) => (
-                  <Card key={a.id} className="mb-2 p-3">
+                  <Card key={a.id} className="mb-2 p-3 shadow-1">
                     <strong>{a.text}</strong>
                     <div className="text-muted small">{a.detail} • {a.time}</div>
                   </Card>
@@ -1470,7 +1619,7 @@ function AdminDashboard() {
 
             {/* System Status */}
             <Col md={6}>
-              <Card className="p-3">
+              <Card className="p-4 shadow">
                 <h5>System Status</h5>
                 <div>Server Status: <span className="text-success">{systemStatus.server}</span></div>
                 <div>Database Health: <span className="text-success">{systemStatus.db}</span></div>
@@ -1485,10 +1634,10 @@ function AdminDashboard() {
 
       {/* Teachers */}
       {activeTab === "teachers" && (
-        <div>
-          <h4>Teacher Management</h4>
+        <div className="mx-3">
+          <h3 className="mb-3 mt-4">Teacher Management</h3>
           {teachers.map((t) => (
-            <Card key={t.id} className="p-3 mb-3 quiz">
+            <Card key={t.id} className="p-3 mb-3 quiz shadow-1">
               <div className="d-flex align-items-center">
                 <div
                   className="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-3"
@@ -1515,10 +1664,10 @@ function AdminDashboard() {
 
       {/* Students */}
       {activeTab === "students" && (
-        <div>
-          <h4>Student Management</h4>
+        <div className="mx-3">
+          <h3 className="mb-3 mt-4">Student Management</h3>
           {students.map((s) => (
-            <Card key={s.id} className="p-3 mb-3 quiz">
+            <Card key={s.id} className="p-3 mb-3 quiz shadow-1">
               <div className="d-flex align-items-center">
                 <div
                   className="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-3"
@@ -1549,19 +1698,21 @@ function AdminDashboard() {
       {/* Reports */}
       {activeTab === "reports" && (
         <div className="px-3 py-2">
-          <h4>Reports</h4>
-          <Card className="p-3 mb-3">
-            <h5>📑 Teacher Reports</h5>
-            <Button variant="outline-primary" onClick={() => downloadReport("teachers")}>
-              Download Teacher Report
-            </Button>
-          </Card>
-          <Card className="p-3">
-            <h5>📑 Student Reports</h5>
-            <Button variant="outline-primary" onClick={() => downloadReport("students")}>
-              Download Student Report
-            </Button>
-          </Card>
+          <h4 className="mb-4">Reports</h4>
+          <div className="d-flex gap-4">
+            <Card className="p-3 shadow-1">
+              <h5>📑 Teacher Reports</h5>
+              <Button variant="outline-success" onClick={() => downloadReport("teachers")}>
+                Download Teacher Report
+              </Button>
+            </Card>
+            <Card className="p-3 shadow-1">
+              <h5>📑 Student Reports</h5>
+              <Button variant="outline-success" onClick={() => downloadReport("students")}>
+                Download Student Report
+              </Button>
+            </Card>
+          </div>
         </div>
       )}
     </div>
@@ -1572,24 +1723,24 @@ function AdminDashboard() {
 function LandingPage() {
   return (
     <div className="">
-    <div className="container text-center pt-5 mt-5">
-      <h1>Welcome to School Nabha</h1>
-      <p>use the below button to login as Teacher or Admin.</p>
-      <p>↓</p>
-      <div className="d-flex justify-content-center gap-3 mt-4">
-        <Nav.Link as={Link} to="/teacher/login">
-          <button className="btn btn-outline-dark px-4">
-            Teacher Login
-          </button>
-        </Nav.Link>
+      <div className="container text-center pt-5 mt-5">
+        <h1>Welcome to School Nabha</h1>
+        <p>use the below button to login as Teacher or Admin.</p>
+        <p>↓</p>
+        <div className="d-flex justify-content-center gap-3 mt-4">
+          <Nav.Link as={Link} to="/teacher/login">
+            <button className="btn btn-outline-dark px-4">
+              Teacher Login
+            </button>
+          </Nav.Link>
 
-        <Nav.Link as={Link} to="/admin/login">
-          <button className="btn btn-outline-dark px-4">
-            Admin Login
-          </button>
-        </Nav.Link>
+          <Nav.Link as={Link} to="/admin/login">
+            <button className="btn btn-outline-dark px-4">
+              Admin Login
+            </button>
+          </Nav.Link>
+        </div>
       </div>
-    </div>
     </div>
   );
 }
@@ -1622,6 +1773,10 @@ export default function App() {
             teacherLoggedIn ? <CreateQuizPage /> : <Navigate replace to="/teacher/login" />
           }
         />
+
+
+        <Route path="/lesson/:id" element={<LessonPreviewPage />} />
+
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route
           path="/admin/dashboard"
